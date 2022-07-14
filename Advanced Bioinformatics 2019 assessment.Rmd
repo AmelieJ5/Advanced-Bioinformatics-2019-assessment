@@ -46,6 +46,40 @@ summary(model)
 # Speed units = milesperhour breaking distance = feet
 
 # Task 3.6. Use ggplot to plot the data points from Task 6 and the linear fit.
+library(ggplot2) 
+#Assign the ggplot function to the variable ggplot_01
+ggplot_1.0 <- ggplot(data = cars, aes(x= speed, y=dist)) + geom_point() + geom_smooth(method = "lm",formula = "y ~ x")
+# Create a new variable called ggplplot_1.1 and add to it a title, x,y labels.
+ggplot_1.1 <- ggplot_1.0 + ggtitle ("Linear model of the relationship between breaking distance(dist) and speed")+ xlab("speed(milesperhour)")+ ylab("dist(feet)")
+ggplot_1.1
 
-
-
+# Task 3.7. Again using the cars dataset, now use linear regression (lm) to estimate the average reaction time for the driver to start breaking (in seconds). To simplify matters you may assume that once breaking commences, breaking distance is proportional to the square of the speed. Explain the steps in your analysis. Do you get reasonable results? Finally, use ggplot to plot the data points and the fitted relationship.
+# Assign the variable "dist_m" to breaking distance, which is the distance in miles    
+    dist_m <- cars$dist* 0.000189 # converting distance to miles by multiplying by the value of one foot in miles
+# Create a variable "speed_m_h" for speed in miles per hour
+    speed_m_h <- cars $speed^2  #Since breaking distance is proportional to the square of speed, square the value of 
+  lm(formula = dist_m ~ speed_m_h) #creating the linear model 
+## 
+## Call:
+## lm(formula = dist_m ~ speed_m_h)
+## 
+## Coefficients:
+## (Intercept)    speed_m_h  
+##   1.675e-03    2.438e-05
+    #From the model,slope is equal to half the average reaction time, if the speed and the distance are constant
+    reaction_time <- 2.438e-05*2 
+    # So reaction time is therefore equal to two times the value of the slope reaction_time
+    #Converting reaction time in hours to seconds
+    coverted_reaction_time <- reaction_time/3600
+    coverted_reaction_time  
+    # Answer: there's  a negative value for reaction time?
+    
+ library(ggplot2)
+    plot_1 <- ggplot(data = cars, aes(speed_m_h, dist_m))+geom_point() 
+    plot_2 <- plot_1 + geom_smooth(method = "lm", formula = dist_m ~ speed_m_h)
+    plot_3 <- plot_2 + ggtitle("Regression model between breaking distance and speed")
+    plot_3
+  # I don't know why there's less???
+  git commit m 
+  
+  

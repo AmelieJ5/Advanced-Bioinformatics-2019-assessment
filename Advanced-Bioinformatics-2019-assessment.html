@@ -422,6 +422,46 @@ summary(model)</p>
 <div id="task-3.6.-use-ggplot-to-plot-the-data-points-from-task-6-and-the-linear-fit." class="section level1">
 <h1>Task 3.6. Use ggplot to plot the data points from Task 6 and the
 linear fit.</h1>
+<p>library(ggplot2) #Assign the ggplot function to the variable
+ggplot_01 ggplot_1.0 &lt;- ggplot(data = cars, aes(x= speed, y=dist)) +
+geom_point() + geom_smooth(method = “lm”,formula = “y ~ x”) # Create a
+new variable called ggplplot_1.1 and add to it a title, x,y labels.
+ggplot_1.1 &lt;- ggplot_1.0 + ggtitle (“Linear model of the relationship
+between breaking distance(dist) and speed”)+
+xlab(“speed(milesperhour)”)+ ylab(“dist(feet)”) ggplot_1.1</p>
+</div>
+<div id="task-3.7.-again-using-the-cars-dataset-now-use-linear-regression-lm-to-estimate-the-average-reaction-time-for-the-driver-to-start-breaking-in-seconds.-to-simplify-matters-you-may-assume-that-once-breaking-commences-breaking-distance-is-proportional-to-the-square-of-the-speed.-explain-the-steps-in-your-analysis.-do-you-get-reasonable-results-finally-use-ggplot-to-plot-the-data-points-and-the-fitted-relationship." class="section level1">
+<h1>Task 3.7. Again using the cars dataset, now use linear regression
+(lm) to estimate the average reaction time for the driver to start
+breaking (in seconds). To simplify matters you may assume that once
+breaking commences, breaking distance is proportional to the square of
+the speed. Explain the steps in your analysis. Do you get reasonable
+results? Finally, use ggplot to plot the data points and the fitted
+relationship.</h1>
+</div>
+<div id="assign-the-variable-dist_m-to-breaking-distance-which-is-the-distance-in-miles" class="section level1">
+<h1>Assign the variable “dist_m” to breaking distance, which is the
+distance in miles</h1>
+<pre><code>dist_m &lt;- cars$dist* 0.000189 # converting distance to miles by multiplying by the value of one foot in miles</code></pre>
+</div>
+<div id="create-a-variable-speed_m_h-for-speed-in-miles-per-hour" class="section level1">
+<h1>Create a variable “speed_m_h” for speed in miles per hour</h1>
+<pre><code>speed_m_h &lt;- cars $speed^2  #Since breaking distance is proportional to the square of speed, square the value of </code></pre>
+<p>lm(formula = dist_m ~ speed_m_h) #creating the linear model ## ##
+Call: ## lm(formula = dist_m ~ speed_m_h) ## ## Coefficients: ##
+(Intercept) speed_m_h<br />
+## 1.675e-03 2.438e-05 #From the model,slope is equal to half the
+average reaction time, if the speed and the distance are constant
+reaction_time &lt;- 2.438e-05*2 # So reaction time is therefore equal to
+two times the value of the slope reaction_time #Converting reaction time
+in hours to seconds coverted_reaction_time &lt;- reaction_time/3600
+coverted_reaction_time<br />
+# Answer: there’s a negative value for reaction time?</p>
+<p>library(ggplot2) plot_1 &lt;- ggplot(data = cars, aes(speed_m_h,
+dist_m))+geom_point() plot_2 &lt;- plot_1 + geom_smooth(method = “lm”,
+formula = dist_m ~ speed_m_h) plot_3 &lt;- plot_2 + ggtitle(“Regression
+model between breaking distance and speed”) plot_3 # I don’t know why
+there’s less??? git commit m</p>
 </div>
 
 
